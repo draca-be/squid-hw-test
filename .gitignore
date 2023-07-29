@@ -1,0 +1,11 @@
+# IDE's
+/.vscode
+/.idea
+
+# Build output
+/target
+build.log
+
+# Normally this should not be generated and the IDF is placed in the global folder (~/.espressif), but we keep it
+# anyway so no accidental commits happen.
+/.embuild

@@ -1,0 +1,33 @@
+[package]
+name = "squid-hw-test"
+version = "0.1.0"
+authors = ["Mathy Vanvoorden <mathy@vanvoorden.be>"]
+edition = "2021"
+resolver = "2"
+build = "build/build.rs"
+
+[profile.release]
+opt-level = "s"
+
+[profile.dev]
+debug = true
+opt-level = 0
+
+[profile.dev.package."*"]
+# Optimize dependencies for size
+opt-level = "z"
+
+[dependencies]
+esp-idf-sys = { version = "0.33.1", features = ["binstart"] }
+esp-idf-hal = { version = "0.41.0", features = ["critical-section"] }
+esp-idf-svc = { version = "0.46.0", features = ["embassy-time-driver", "embassy-time-isr-queue"] }
+embassy-executor = { version = "0.2.0", features = ["arch-xtensa", "executor-thread", "nightly"] }
+embassy-time = "0.1.1"
+futures = { version = "0.3.28", features = ["async-await"] }
+static_cell = "1.0.0"
+
+[build-dependencies]
+# Keep the features on embuild intact if you want to build on the desktop. They are auto-selected by esp-idf-sys when
+# building for ESP32 but by default they are off on x86_64
+embuild = { version = "0.31.1", features = ["cmake", "espidf"] }
+anyhow = "1"

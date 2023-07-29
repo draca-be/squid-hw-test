@@ -1,0 +1,30 @@
+[build]
+target = "xtensa-esp32-espidf"
+
+[target.xtensa-esp32-espidf]
+linker = "ldproxy"
+runner = "espflash flash --monitor"
+rustflags = ["--cfg", "espidf_time64"] # Extending time_t for ESP IDF 5: https://github.com/esp-rs/rust/issues/110
+
+[unstable]
+build-std = ["std", "panic_abort"]
+
+[env]
+# Install globally instead of in local .embuild folder
+ESP_IDF_TOOLS_INSTALL_DIR = { value = "global" }
+# We want a specific IDF version. If you change this version, you need to also make some other changes in order to keep
+# on-device debugging in a working state.
+#
+# * (Obviously) First run the cargo build to see if it still compiles
+# * Run ~/.espressif/esp-idf/<$TAG>/install.sh so that the correct versions of OpenOCD and GDB get installed
+# * Update the 'jtag-debug-esp32s3' run configuration as it utilizes an hardcoded paths which contains a version number
+# * Update the CLion setting `OpenOCD Location` in the `Embedded Development` tab
+#
+# Note that older versions of OpenOCD and GDB will probably work on your PC because they are persisted, but checkouts on
+# new machines will not work so do not forget these steps.
+#
+# After you have  verified everything is okay and the change is pushed inform the team that they should update their
+# configuration according to this page
+#
+# https://soundtalks.atlassian.net/wiki/spaces/EM/pages/306577515/JTAG+debugging+using+CLion
+ESP_IDF_VERSION = { value = "v5.0.2" }
