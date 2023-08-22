@@ -2,14 +2,20 @@
 
 mod leds;
 mod watchdog;
+mod hardware;
+mod touch;
 
 use embassy_executor::{Spawner, Executor};
 use static_cell::StaticCell;
+use crate::hardware::Hardware;
 
 #[embassy_executor::task]
 async fn run(spawner: Spawner) {
+    let hardware = Hardware::new();
+
     spawner.spawn(watchdog::start()).unwrap();
-    spawner.spawn(leds::start()).unwrap();
+    spawner.spawn(leds::start(hardware.leds)).unwrap();
+    spawner.spawn(touch::start(hardware.touch)).unwrap();
 }
 
 fn main() {
@@ -27,6 +33,7 @@ fn main() {
 
     watchdog::init();
     leds::init();
+    touch::init();
 
     // There is no embassy_executor::main macro implemented yet so we manually define an executor
     static EXECUTOR: StaticCell<Executor> = StaticCell::new();
