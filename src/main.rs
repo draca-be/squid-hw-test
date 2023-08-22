@@ -1,5 +1,6 @@
 #![feature(type_alias_impl_trait)]
 
+mod leds;
 mod watchdog;
 
 use embassy_executor::{Spawner, Executor};
@@ -8,6 +9,7 @@ use static_cell::StaticCell;
 #[embassy_executor::task]
 async fn run(spawner: Spawner) {
     spawner.spawn(watchdog::start()).unwrap();
+    spawner.spawn(leds::start()).unwrap();
 }
 
 fn main() {
@@ -24,6 +26,7 @@ fn main() {
     println!("Hardware test Fri3D Camp squid badge (2022)");
 
     watchdog::init();
+    leds::init();
 
     // There is no embassy_executor::main macro implemented yet so we manually define an executor
     static EXECUTOR: StaticCell<Executor> = StaticCell::new();

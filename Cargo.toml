@@ -25,6 +25,10 @@ embassy-executor = { version = "0.2.0", features = ["arch-xtensa", "executor-thr
 embassy-time = "0.1.1"
 futures = { version = "0.3.28", features = ["async-await"] }
 static_cell = "1.0.0"
+smart-leds = "0.3.0"
+smart-leds-trait = "0.2.1"
+ws2812-esp32-rmt-driver = "0.6.0"
+
 
 [build-dependencies]
 # Keep the features on embuild intact if you want to build on the desktop. They are auto-selected by esp-idf-sys when
