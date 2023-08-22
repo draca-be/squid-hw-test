@@ -23,6 +23,7 @@ esp-idf-hal = { version = "0.41.0", features = ["critical-section"] }
 esp-idf-svc = { version = "0.46.0", features = ["embassy-time-driver", "embassy-time-isr-queue"] }
 embassy-executor = { version = "0.2.0", features = ["arch-xtensa", "executor-thread", "nightly"] }
 embassy-time = "0.1.1"
+embassy-sync = "0.2.0"
 futures = { version = "0.3.28", features = ["async-await"] }
 static_cell = "1.0.0"
 smart-leds = "0.3.0"
