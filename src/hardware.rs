@@ -7,12 +7,14 @@ use crate::buttons::ButtonsConfiguration;
 use crate::display::DisplayConfiguration;
 use crate::touch::TouchConfiguration;
 use crate::leds::LedsConfiguration;
+use crate::wifi::WifiConfiguration;
 
 pub struct Hardware {
     pub leds: LedsConfiguration,
     pub touch: TouchConfiguration,
     pub buttons: ButtonsConfiguration,
     pub display: DisplayConfiguration,
+    pub wifi: WifiConfiguration,
 }
 
 impl Hardware {
@@ -44,6 +46,9 @@ impl Hardware {
 
                 baudrate: 40.MHz().into(),
                 mode: MODE_3,
+            },
+            wifi: WifiConfiguration {
+                modem: peripherals.modem,
             },
         }
     }
