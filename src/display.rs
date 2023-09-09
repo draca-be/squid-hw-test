@@ -43,13 +43,16 @@ pub async fn start(configuration: DisplayConfiguration) {
         // Needed to go above 26.7 MHz
         .write_only(true);
 
+    let driver_config = config::DriverConfig::new()
+        .dma(Dma::Auto(4096));
+
     let device = SpiDeviceDriver::new_single(
         configuration.spi,
         configuration.sclk,
         configuration.sdo,
         Some(configuration.sdi),
         Some(configuration.cs),
-        &SpiDriverConfig::new(),
+        &driver_config,
         &config,
     ).expect("Could not configure device driver");
 

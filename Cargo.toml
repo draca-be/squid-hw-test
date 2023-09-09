@@ -34,7 +34,6 @@ mipidsi = "0.7.1"
 display-interface-spi = "0.4.1"
 embedded-hal = "1.0.0-alpha.10"
 
-
 [build-dependencies]
 # Keep the features on embuild intact if you want to build on the desktop. They are auto-selected by esp-idf-sys when
 # building for ESP32 but by default they are off on x86_64
