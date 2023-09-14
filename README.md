@@ -32,14 +32,14 @@ exit your console and start it again to load the changed environment
 
 `cargo install ldproxy espflash cargo-espflash`
 
-### to build the code
+## to build the code
 `source export-esp.sh`
 `cargo build`
 
-### to flash the code
+## to flash the code
 `cargo espflash flash`
 
-### to build and flash the code in 1 step
+## to build and flash the code in 1 step
 `cargo run`
 
 
@@ -50,13 +50,13 @@ exit your console and start it again to load the changed environment
   * `sudo apt install linux-tools-virtual hwdata`
   * `sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*/usbip 20`
 
-## forward badge USB to WSL
+### forward badge USB to WSL
 * in windows powerschell with administrative rights
   * `usbipd wsl list`
     * in the list you see you will find a line with "Silicon Labs CP210x USB to UART Bridge" with in the very front of the line a bus ID, in my case 2-1
   * `usbipd wsl attach --busid 2-1`
 
-## Make a udev rule to give proper permissions and a symbolic link
+### Make a udev rule to give proper permissions and a symbolic link
 * plug in your fri3d badge and run the following command `udevadm info -a /dev/ttyUSB0`
   look for the device `ATTRS{product}=="CP2104 USB to UART Bridge Controller"` and look for the `serial` attribute 
 * create the following file in `/etc/udev/rules.d/61-usb_serial.rules` (file owned by root:root 644)
@@ -80,3 +80,23 @@ LABEL="usb_serial_rules_end"
   `sudo service udev restart`
   `sudo udevadm control --reload`
   * enjoy your personalized /dev/fri3dBadge2020 link
+
+### error `Error while connecting to device`
+```
+Unable to connect, retrying with default delay...
+Unable to connect, retrying with extra delay...
+Error: espflash::connection_failed
+
+  × Error while connecting to device
+  ╰─▶ Failed to connect to the device
+  help: Ensure that the device is connected and the reset and boot pins are not being held down`
+```
+try the following when the espflash is trying to connect:
+```
+Serial port: '/dev/ttyUSB0'
+Connecting...
+```
+1. hold the button labeled boot - drukknop - IO00
+2. press the reset button  
+This will reset the esp32 and hold it in boot mode.  
+3. Once the espflash is flashing you can let go of the boot button.
