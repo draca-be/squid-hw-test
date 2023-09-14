@@ -1,5 +1,5 @@
 # Rust often needs a bit of an extra main task stack size compared to C (the default is 3K)
-CONFIG_ESP_MAIN_TASK_STACK_SIZE=7000
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=10000
 
 # Use this to set FreeRTOS kernel tick frequency to 1000 Hz (100 Hz by default).
 # This allows to use 1 ms granuality for thread sleeps (10 ms by default).
@@ -16,3 +16,13 @@ CONFIG_APP_REPRODUCIBLE_BUILD=y
 # Disable Idle task watchdog as we have our own Watchdog implementation
 CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0=n
 CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1=n
+
+#CONFIG_LOG_DEFAULT_LEVEL_VERBOSE=y
+#CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+#CONFIG_LOG_DEFAULT_LEVEL_DEBUG=y
+#CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+CONFIG_LOG_DEFAULT_LEVEL_ERROR=y
+
+# Espressif advises to not use it if you don't need it
+CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE=n
+CONFIG_ESP32_WIFI_NVS_ENABLED=n

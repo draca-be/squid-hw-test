@@ -5,6 +5,8 @@ mod watchdog;
 mod hardware;
 mod touch;
 mod buttons;
+mod display;
+mod wifi;
 
 use embassy_executor::{Spawner, Executor};
 use static_cell::StaticCell;
@@ -18,6 +20,8 @@ async fn run(spawner: Spawner) {
     spawner.spawn(leds::start(hardware.leds)).unwrap();
     spawner.spawn(touch::start(hardware.touch)).unwrap();
     spawner.spawn(buttons::start(hardware.buttons)).unwrap();
+    spawner.spawn(display::start(hardware.display)).unwrap();
+    spawner.spawn(wifi::start(hardware.wifi)).unwrap();
 }
 
 fn main() {
@@ -37,6 +41,8 @@ fn main() {
     leds::init();
     touch::init();
     buttons::init();
+    display::init();
+    wifi::init();
 
     // There is no embassy_executor::main macro implemented yet so we manually define an executor
     static EXECUTOR: StaticCell<Executor> = StaticCell::new();

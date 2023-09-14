@@ -21,7 +21,7 @@ opt-level = "z"
 esp-idf-sys = { version = "0.33.1", features = ["binstart"] }
 esp-idf-hal = { version = "0.41.0", features = ["critical-section"] }
 esp-idf-svc = { version = "0.46.0", features = ["embassy-time-driver", "embassy-time-isr-queue"] }
-embassy-executor = { version = "0.2.0", features = ["arch-xtensa", "executor-thread", "nightly"] }
+embassy-executor = { version = "=0.2.0", features = ["arch-xtensa", "executor-thread", "nightly"] }
 embassy-time = "0.1.1"
 embassy-sync = "0.2.0"
 futures = { version = "0.3.28", features = ["async-await"] }
@@ -29,7 +29,12 @@ static_cell = "1.0.0"
 smart-leds = "0.3.0"
 smart-leds-trait = "0.2.1"
 ws2812-esp32-rmt-driver = "0.6.0"
-
+embedded-graphics = "0.8.0"
+mipidsi = "0.7.1"
+display-interface-spi = "0.4.1"
+embedded-hal = "1.0.0-alpha.10"
+embedded-svc = "0.25.3"
+anyhow = "1"
 
 [build-dependencies]
 # Keep the features on embuild intact if you want to build on the desktop. They are auto-selected by esp-idf-sys when
